@@ -16,7 +16,7 @@ async function run() {
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
                     username VARCHAR(256),
-                    date_created DATE NOT NULL,
+                    date_created BIGINT,
                     hash VARCHAR(512) NOT NULL
                 );           
                 CREATE TABLE watchlist (
@@ -31,7 +31,7 @@ async function run() {
                   id SERIAL PRIMARY KEY NOT NULL,
                   symbol VARCHAR(512) NOT NULL,
                   title VARCHAR(512) NOT NULL,
-                  date_purchased DATE NOT NULL,
+                  date_purchased BIGINT,
                   cost DECIMAL(8,2) NOT NULL,
                   quantity INTEGER NOT NULL,
                   current_price DECIMAL(8,2) NOT NULL
