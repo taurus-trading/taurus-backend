@@ -17,11 +17,22 @@ async function run() {
                     email VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE watchlist (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    name VARCHAR(512) NOT NULL,
-                    cool_factor INTEGER NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    symbol VARCHAR(512) NOT NULL,
+                    title VARCHAR(512) NOT NULL,
+                    current_price DECIMAL(8,2) NOT NULL,
+                    user_id INTEGER NOT NULL REFERENCES users(id)
+            );
+                CREATE TABLE portfolio (
+                  user_id INTEGER NOT NULL REFERENCES users(id),
+                  id SERIAL PRIMARY KEY NOT NULL,
+                  symbol VARCHAR(512) NOT NULL,
+                  title VARCHAR(512) NOT NULL,
+                  date_purchased DATE NOT NULL,
+                  cost DECIMAL(8,2) NOT NULL,
+                  quantity INTEGER NOT NULL,
+                  current_price DECIMAL(8,2) NOT NULL
             );
         `);
 
