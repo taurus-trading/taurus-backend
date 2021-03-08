@@ -1,6 +1,6 @@
 module.exports = [
   {
-    email: 'john@arbuckle.com',
+    email: 'warren@buffett.com',
     hash: 1234
   }
 ];

@@ -1,8 +1,10 @@
 const client = require('../lib/client');
 // import our seed data:
-const animals = require('./animals.js');
+const stocks = require('./stocks.js');
+const portfolioStocks = require('./portfolio.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
+// const { port } = require('../lib/client');
 
 run();
 
@@ -25,12 +27,22 @@ async function run() {
     const user = users[0].rows[0];
 
     await Promise.all(
-      animals.map(animal => {
+      stocks.map(stock => {
         return client.query(`
-                    INSERT INTO animals (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO watchlist (symbol, title, current_price, user_id)
+                    VALUES ($1, $2, $3, $4);
                 `,
-        [animal.name, animal.cool_factor, user.id]);
+        [stock.symbol, stock.title, stock.current_price, user.id]);
+      })
+    );
+
+    await Promise.all(
+      portfolioStocks.map(portfolioStock => {
+        return client.query(`
+                    INSERT INTO portfolio (user_id, symbol, title, date_purchased, cost, quantity, current_price)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7);
+                `,
+        [user.id, portfolioStock.symbol, portfolioStock.title, portfolioStock.date_purchased, portfolioStock.cost, portfolioStock.quantity, portfolioStock.current_price]);
       })
     );
     
