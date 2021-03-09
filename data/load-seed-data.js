@@ -17,11 +17,11 @@ async function run() {
     const users = await Promise.all(
       usersData.map(user => {
         return client.query(`
-                      INSERT INTO users (email, hash)
-                      VALUES ($1, $2)
+                      INSERT INTO users (email, username, date_created, hash)
+                      VALUES ($1, $2, $3, $4)
                       RETURNING *;
                   `,
-        [user.email, user.hash]);
+        [user.email, user.username, user.date_created, user.hash]);
       })
     );
       
@@ -30,10 +30,10 @@ async function run() {
     await Promise.all(
       stocks.map(stock => {
         return client.query(`
-                    INSERT INTO watchlist (symbol, title, current_price, user_id)
-                    VALUES ($1, $2, $3, $4);
+                    INSERT INTO watchlist (symbol, title, user_id)
+                    VALUES ($1, $2, $3);
                 `,
-        [stock.symbol, stock.title, stock.current_price, user.id]);
+        [stock.symbol, stock.title, user.id]);
       })
     );
 
