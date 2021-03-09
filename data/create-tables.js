@@ -34,6 +34,11 @@ async function run() {
                   quantity INTEGER NOT NULL,
                   current_price DECIMAL(8,2) NOT NULL
             );
+                CREATE TABLE notes (
+                  user_id INTEGER NOT NULL REFERENCES users(id),
+                  id SERIAL PRIMARY KEY NOT NULL,
+                  note VARCHAR(512) NOT NULL
+            );
         `);
 
     console.log('create tables complete', getEmoji(), getEmoji(), getEmoji());
