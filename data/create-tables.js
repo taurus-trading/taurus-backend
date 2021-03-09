@@ -23,7 +23,6 @@ async function run() {
                     id SERIAL PRIMARY KEY NOT NULL,
                     symbol VARCHAR(512) NOT NULL,
                     title VARCHAR(512) NOT NULL,
-                    current_price DECIMAL(8,2) NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
                 CREATE TABLE portfolio (

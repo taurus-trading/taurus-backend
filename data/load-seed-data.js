@@ -29,10 +29,10 @@ async function run() {
     await Promise.all(
       stocks.map(stock => {
         return client.query(`
-                    INSERT INTO watchlist (symbol, title, current_price, user_id)
-                    VALUES ($1, $2, $3, $4);
+                    INSERT INTO watchlist (symbol, title, user_id)
+                    VALUES ($1, $2, $3);
                 `,
-        [stock.symbol, stock.title, stock.current_price, user.id]);
+        [stock.symbol, stock.title, user.id]);
       })
     );
 
