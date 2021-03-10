@@ -38,7 +38,7 @@ async function run() {
                 CREATE TABLE notes (
                   user_id INTEGER NOT NULL REFERENCES users(id),
                   id SERIAL PRIMARY KEY NOT NULL,
-                  note VARCHAR(512) NOT NULL
+                  text VARCHAR(512) NOT NULL
             );
         `);
 
