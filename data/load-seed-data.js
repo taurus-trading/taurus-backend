@@ -4,6 +4,7 @@ const stocks = require('./stocks.js');
 const portfolioStocks = require('./portfolio.js');
 const usersData = require('./users.js');
 const { getEmoji } = require('../lib/emoji.js');
+const notes = require('./notes.js');
 // const { port } = require('../lib/client');
 
 run();
@@ -33,6 +34,16 @@ async function run() {
                     VALUES ($1, $2, $3);
                 `,
         [stock.symbol, stock.title, user.id]);
+      })
+    );
+
+    await Promise.all(
+      notes.map(note => {
+        return client.query(`
+                    INSERT INTO notes (text, user_id)
+                    VALUES ($1, $2);
+                `,
+        [note.text, user.id]);
       })
     );
 
