@@ -31,7 +31,8 @@ describe('app routes', () => {
       return client.end(done);
     });
 
-    test('returns animals', async() => {
+    // notes endpoints
+    test('returns notes for a signed in user', async() => {
 
       const expectation = [
         {
